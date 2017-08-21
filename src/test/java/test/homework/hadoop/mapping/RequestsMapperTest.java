@@ -20,8 +20,8 @@ public class RequestsMapperTest {
         new MapDriver<Object, Text, Text, TempRequestDataWritable>()
                 .withMapper(new RequestsMapper())
                 .withInput(new LongWritable(0), value)
-                .withCounter("Browser Usage", "Robot/Spider", 1)
-                .withCounter("Browser Usage", "Firefox", 1)
+                .withCounter(GROUP_NAME, "Robot/Spider", 1)
+                .withCounter(GROUP_NAME, "Firefox", 1)
                 .withOutput(OUTPUT_1_KEY, OUTPUT_1_VALUE)
                 .withOutput(OUTPUT_2_KEY, OUTPUT_2_VALUE)
                 .runTest(false);
@@ -41,4 +41,6 @@ public class RequestsMapperTest {
     static String TEST =
             "ip1 - - [24/Apr/2011:04:06:01 -0400] \"GET /~strabal/grease/photo9/927-3.jpg HTTP/1.1\" 200 40028 \"-\" \"Mozilla/5.0 (compatible; YandexImages/3.0; +http://yandex.com/bots)\"\n" +
             "ip2 - - [24/Apr/2011:04:20:11 -0400] \"GET /sun_ss5/ HTTP/1.1\" 200 14917 \"http://www.stumbleupon.com/refer.php?url=http%3A%2F%host1%2Fsun_ss5%2F\" \"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16\"";
+
+    static String GROUP_NAME = "Browser Usage";
 }

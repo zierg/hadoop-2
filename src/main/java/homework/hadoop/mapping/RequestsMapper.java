@@ -31,7 +31,6 @@ public class RequestsMapper extends Mapper<Object, Text, Text, TempRequestDataWr
         int bytes = Integer.parseInt(params[1]);
         requestData.setTotalBytes(bytes);
         context.write(ip, requestData);
-        log.info("param2: {}", params[2]);
         context.getCounter(BROWSER_USAGE_GROUP, getBrowser(params[2])).increment(1);
     }
 
