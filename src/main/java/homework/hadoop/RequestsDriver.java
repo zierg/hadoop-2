@@ -1,5 +1,6 @@
 package homework.hadoop;
 
+import homework.hadoop.mapping.RequestsMapper;
 import homework.hadoop.writables.TempRequestDataWritable;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -37,7 +38,12 @@ public class RequestsDriver extends Configured implements Tool {
         FileSystem fs = FileSystem.getLocal(conf);
         fs.delete(outputDir, true);
         FileOutputFormat.setOutputPath(job, outputDir);
-        return job.waitForCompletion(true) ? 0 : 1;
+        int result = job.waitForCompletion(true) ? 0 : 1;
+        log.info("Browsers usage statistics:");
+        job.getCounters()
+                .getGroup("Browser Usage")
+                .forEach(counter -> log.info("{}: {}", counter.getDisplayName(), counter.getValue()));
+        return result;
     }
 
     public static void main(String[] args) throws Exception {
@@ -45,17 +51,6 @@ public class RequestsDriver extends Configured implements Tool {
         int exitCode = ToolRunner.run(driver, args);
         System.exit(exitCode);
     }
-
-//    public static void main(String[] args) {
-//
-//
-//        String logRecord = "ip2 - - [24/Apr/2011:04:20:11 -0400] \"GET /sun_ss5/pdf.gif HTTP/1.1\" 200 390 \"http://host2/sun_ss5/\" \"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16\"";
-//        String[] strings = logRecord.replaceAll("(.+) - -.*\\[.+] \"[^\"]+\" \\d+ (\\d+) \"[^\"]+\" \"([^\"]+)\"", "$1;$2;$3").split(";");
-//        log.info("Strings: {}", Arrays.toString(strings));
-//
-//        UserAgent userAgent = UserAgent.parseUserAgentString(strings[2]);
-//        log.info("Browser: {}", userAgent.getBrowser().getGroup().getName());
-//    }
 
     static Logger log = LoggerFactory.getLogger(RequestsDriver.class);
 }

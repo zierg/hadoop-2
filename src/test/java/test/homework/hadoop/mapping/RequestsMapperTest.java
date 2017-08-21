@@ -1,6 +1,6 @@
-package test.homework.hadoop;
+package test.homework.hadoop.mapping;
 
-import homework.hadoop.RequestsMapper;
+import homework.hadoop.mapping.RequestsMapper;
 import homework.hadoop.writables.TempRequestDataWritable;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +20,8 @@ public class RequestsMapperTest {
         new MapDriver<Object, Text, Text, TempRequestDataWritable>()
                 .withMapper(new RequestsMapper())
                 .withInput(new LongWritable(0), value)
+                .withCounter("Browser Usage", "Robot/Spider", 1)
+                .withCounter("Browser Usage", "Firefox", 1)
                 .withOutput(OUTPUT_1_KEY, OUTPUT_1_VALUE)
                 .withOutput(OUTPUT_2_KEY, OUTPUT_2_VALUE)
                 .runTest(false);
