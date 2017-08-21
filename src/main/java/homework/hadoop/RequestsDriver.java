@@ -66,7 +66,7 @@ public class RequestsDriver extends Configured implements Tool {
         FileInputFormat.addInputPath(job, new Path(args[0]));
         Path outputDir = new Path(args[1]);
         clearLocalSystem(conf, outputDir);
-        if (args.length == 3 && COMPRESS_PARAMETER_NAME.equals(args[2])) {
+        if (args.length >= 3 && COMPRESS_PARAMETER_NAME.equals(args[2])) {
             setupForSequenceFileWithCompression(job, outputDir);
         } else {
             setupForTextFileWithoutCompression(conf, job, outputDir);
