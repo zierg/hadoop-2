@@ -22,9 +22,14 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-// java -jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output
-// hadoop jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output
-// hadoop fs -libjars homework-2-ip-requests-1.0-SNAPSHOT-all.jar -text output/part-r-00000 | head -n40
+/**
+ * How to use
+ * Run in local mode: java -jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output
+ * Run with the text output format without compression: hadoop jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output
+ * Run with the sequence output format with compression: hadoop jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output compress
+ * Read first 40 lines of the output file: hadoop fs -libjars homework-2-ip-requests-1.0-SNAPSHOT-all.jar -text output/part-r-00000 | head -n40
+ */
+
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RequestsDriver extends Configured implements Tool {
 
