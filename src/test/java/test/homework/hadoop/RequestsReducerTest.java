@@ -17,7 +17,7 @@ import java.util.Collections;
 public class RequestsReducerTest {
     
     @Test
-    public void testLongestWord() throws IOException {
+    public void testRequestDataReducing() throws IOException {
         new ReduceDriver<Text, TempRequestDataWritable, Text, RequestDataWritable>()
                 .withReducer(new RequestsReducer())
                 .withInput(new Text(IP_1), Arrays.asList(IP_1_REQUEST_1, IP_1_REQUEST_2))

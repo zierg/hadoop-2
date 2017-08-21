@@ -28,6 +28,7 @@ public class RequestsDriver extends Configured implements Tool {
         Job job = Job.getInstance(conf, "Request Data");
         job.setJarByClass(RequestsDriver.class);
         job.setMapperClass(RequestsMapper.class);
+        job.setCombinerClass(RequestsCombiner.class);
         job.setReducerClass(RequestsReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(TempRequestDataWritable.class);
