@@ -24,7 +24,7 @@ import java.io.IOException;
 
 // java -jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output
 // hadoop jar homework-2-ip-requests-1.0-SNAPSHOT-all.jar input output
-// hadoop fs -libjars homework-2-ip-requests-1.0-SNAPSHOT-all.jar -text output/part-r-00000
+// hadoop fs -libjars homework-2-ip-requests-1.0-SNAPSHOT-all.jar -text output/part-r-00000 | head -n40
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RequestsDriver extends Configured implements Tool {
 
