@@ -3,6 +3,7 @@ package homework.hadoop.writables;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Writable;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 @Getter
 @AllArgsConstructor
+@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TempRequestDataWritable implements Writable {
 
