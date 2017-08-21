@@ -1,10 +1,11 @@
-package homework.hadoop;
+package homework.hadoop.writables;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.FloatWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Writable;
 
 import java.io.DataInput;
@@ -16,21 +17,21 @@ import java.io.IOException;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestDataWritable implements Writable {
 
-    IntWritable averageBytes;
-    IntWritable totalBytes;
+    FloatWritable averageBytes;
+    LongWritable totalBytes;
 
     public RequestDataWritable() {
-        averageBytes = new IntWritable(0);
-        totalBytes = new IntWritable(0);
+        averageBytes = new FloatWritable(0);
+        totalBytes = new LongWritable(0);
     }
 
-    public RequestDataWritable setAverageBytes(int averageBytes) {
+    public RequestDataWritable setAverageBytes(float averageBytes) {
         this.averageBytes.set(averageBytes);
         return this;
     }
 
-    public RequestDataWritable setTotalBytes(int totalBytes) {
-        this.averageBytes.set(totalBytes);
+    public RequestDataWritable setTotalBytes(long totalBytes) {
+        this.totalBytes.set(totalBytes);
         return this;
     }
 
@@ -70,6 +71,6 @@ public class RequestDataWritable implements Writable {
 
     @Override
     public String toString() {
-        return averageBytes + ";" + totalBytes;
+        return averageBytes + "," + totalBytes;
     }
 }

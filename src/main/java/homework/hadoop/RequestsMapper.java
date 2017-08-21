@@ -1,5 +1,6 @@
 package homework.hadoop;
 
+import homework.hadoop.writables.TempRequestDataWritable;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.apache.hadoop.io.Text;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class RequestsMapper extends Mapper<Object, Text, Text, RequestDataWritable> {
+public class RequestsMapper extends Mapper<Object, Text, Text, TempRequestDataWritable> {
 
     @Override
     protected void map(Object key, Text value, Context context) throws IOException, InterruptedException {
@@ -25,7 +26,6 @@ public class RequestsMapper extends Mapper<Object, Text, Text, RequestDataWritab
         String[] params = getLogRecordParams(logRecord);
         ip.set(params[0]);
         int bytes = Integer.parseInt(params[1]);
-        requestData.setAverageBytes(bytes);
         requestData.setTotalBytes(bytes);
         context.write(ip, requestData);
     }
@@ -41,7 +41,8 @@ public class RequestsMapper extends Mapper<Object, Text, Text, RequestDataWritab
 
     Text ip = new Text();
 
-    RequestDataWritable requestData = new RequestDataWritable();
+    TempRequestDataWritable requestData = new TempRequestDataWritable()
+            .setAmountOfRequests(1);
 
     static String MAPPING_REGEX = "(.+) - -.*\\[.+] \"[^\"]+\" \\d+ (\\d+) \"[^\"]+\" \"([^\"]+)\"";
     static String MAPPING_DELIMITER = ";";

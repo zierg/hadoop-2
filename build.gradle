@@ -28,7 +28,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
     testCompile 'org.apache.mrunit:mrunit:1.1.0:hadoop1'
-
+    testCompile 'org.projectlombok:lombok:1.16.18'
 }
 
 jar {
