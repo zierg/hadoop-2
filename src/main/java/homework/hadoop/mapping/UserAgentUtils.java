@@ -4,10 +4,11 @@ import eu.bitwalker.useragentutils.UserAgent;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
+@SuppressWarnings("WeakerAccess")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-final class UserAgentUtils {
+public final class UserAgentUtils {
 
-    static String getBrowser(String userAgent) {
+    public static String getBrowser(String userAgent) {
         UserAgent agent = UserAgent.parseUserAgentString(userAgent);
         return agent.getBrowser().getGroup().getName();
     }
